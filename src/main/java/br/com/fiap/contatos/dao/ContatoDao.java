@@ -2,6 +2,7 @@ package br.com.fiap.contatos.dao;
 
 import br.com.fiap.contatos.model.Contato;
 import jakarta.persistence.EntityManager;
+import java.util.List;
 
 public class ContatoDao {
 
@@ -34,7 +35,21 @@ public class ContatoDao {
             System.out.println(contatoConsulta.toString());
             System.out.println("---------------------------");
         }
+    }
 
+    public List<Contato> listarTodosOsContatos(){
+        // SQL ----> SELECT % FROM T_CONTATOS ORDER BY nome ASC
+
+        //JPQL
+        String consuta = "SELECT c FROM Contato c ORDER BY nome DESC";
+        return em.createQuery(consuta).getResultList();
+    }
+
+    public List<Contato> listarContatosPorEmail(String email){
+        String consuta = "SELECT c FROM Contato c WHERE email = :email";
+        return em.createQuery(consuta, Contato.class)
+                .setParameter("email", email)
+                .getResultList();
     }
 
 

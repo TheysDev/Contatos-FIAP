@@ -4,8 +4,8 @@ import br.com.fiap.contatos.dao.Conexao;
 import br.com.fiap.contatos.dao.ContatoDao;
 import br.com.fiap.contatos.model.Contato;
 import jakarta.persistence.EntityManager;
-
 import java.time.LocalDate;
+import java.util.List;
 
 public class ContatoApp {
 
@@ -17,9 +17,41 @@ public class ContatoApp {
         // cadastrar(em);
         // atualizar(em);
         // excluir(em);
-        consultarContatoPorId(em);
+        //consultarContatoPorId(em);
+        //listarTodosOsContatos(em);
+        listarContatosPorEmail(em);
 
 
+    }
+
+    public static void listarContatosPorEmail(EntityManager em){
+
+        //Criar uma instância do Dao
+        ContatoDao contatoDao = new ContatoDao(em);
+
+        List<Contato> contatos = contatoDao.listarContatosPorEmail("FABIANA@EMAIL.COM".toLowerCase());
+
+        for(Contato contato : contatos) {
+            System.out.println("---------------------");
+            System.out.println(contato.toString());
+        }
+        System.out.println("");
+        System.out.println("Fim dos registros....");
+    }
+
+    public static void listarTodosOsContatos(EntityManager em){
+
+        //Criar uma instância do Dao
+        ContatoDao contatoDao = new ContatoDao(em);
+
+        List<Contato> contatos = contatoDao.listarTodosOsContatos();
+
+        for(Contato contato : contatos) {
+            System.out.println("---------------------");
+            System.out.println(contato.toString());
+        }
+        System.out.println("");
+        System.out.println("Fim dos registros....");
     }
 
     public static void cadastrar(EntityManager em){
@@ -67,9 +99,8 @@ public class ContatoApp {
         //Criar uma instância do Dao
         ContatoDao contatoDao = new ContatoDao(em);
 
-        em.getTransaction().begin();
         contatoDao.consultarContatoPorId(4L);
-        em.getTransaction().commit();
+
     }
 
 }
