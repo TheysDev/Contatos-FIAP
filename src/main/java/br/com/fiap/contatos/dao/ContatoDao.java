@@ -24,5 +24,18 @@ public class ContatoDao {
         em.remove(contatoExcluir);
     }
 
+    public void consultarContatoPorId(Long id) {
+        Contato contatoConsulta = em.find(Contato.class, id);
+
+        if (contatoConsulta == null) {
+            System.out.println("Contato Não Encontrado!");
+        }else {
+            System.out.println("---------------------------");
+            System.out.println(contatoConsulta.toString());
+            System.out.println("---------------------------");
+        }
+
+    }
+
 
 }

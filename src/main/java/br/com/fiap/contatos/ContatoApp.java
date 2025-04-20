@@ -4,8 +4,6 @@ import br.com.fiap.contatos.dao.Conexao;
 import br.com.fiap.contatos.dao.ContatoDao;
 import br.com.fiap.contatos.model.Contato;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
 
@@ -16,9 +14,10 @@ public class ContatoApp {
         //Criação EntityManager
         EntityManager em = Conexao.getEntityManager();
 
-        //cadastrar(em);
-        //atualizar(em);
-        excluir(em);
+        // cadastrar(em);
+        // atualizar(em);
+        // excluir(em);
+        consultarContatoPorId(em);
 
 
     }
@@ -60,6 +59,16 @@ public class ContatoApp {
 
         em.getTransaction().begin();
         contatoDao.excluir(contato);
+        em.getTransaction().commit();
+    }
+
+    public static void consultarContatoPorId(EntityManager em){
+
+        //Criar uma instância do Dao
+        ContatoDao contatoDao = new ContatoDao(em);
+
+        em.getTransaction().begin();
+        contatoDao.consultarContatoPorId(4L);
         em.getTransaction().commit();
     }
 
