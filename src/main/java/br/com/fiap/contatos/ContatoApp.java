@@ -2,7 +2,9 @@ package br.com.fiap.contatos;
 
 import br.com.fiap.contatos.dao.Conexao;
 import br.com.fiap.contatos.dao.ContatoDao;
+import br.com.fiap.contatos.dao.TipoContatoDao;
 import br.com.fiap.contatos.model.Contato;
+import br.com.fiap.contatos.model.TipoContato;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
@@ -14,12 +16,12 @@ public class ContatoApp {
         //Criação EntityManager
         EntityManager em = Conexao.getEntityManager();
 
-        // cadastrar(em);
+        //cadastrar(em);
         // atualizar(em);
         // excluir(em);
-        //consultarContatoPorId(em);
+        consultarContatoPorId(em);
         //listarTodosOsContatos(em);
-        listarContatosPorEmail(em);
+        //listarContatosPorEmail(em);
 
 
     }
@@ -55,15 +57,24 @@ public class ContatoApp {
     }
 
     public static void cadastrar(EntityManager em){
+
+        TipoContato tipoContato = new TipoContato();
+        tipoContato.setId(1L);
+
+        TipoContatoDao tipoContatoDao = new TipoContatoDao(em);
+
+        em.getTransaction().begin();
+
+
         Contato contato = new Contato();
-        contato.setNome("Fabiana Gomes");
-        contato.setEmail("fabiana@email.com");
-        contato.setDataNascimento(LocalDate.of(2000,10,15));
+        contato.setNome("Pedro da Silva");
+        contato.setEmail("pedro@fiap.com.br");
+        contato.setDataNascimento(LocalDate.of(2004,11,10));
+        contato.setTipoContato(tipoContato);
 
         //Criar uma instância do Dao
         ContatoDao contatoDao = new ContatoDao(em);
 
-        em.getTransaction().begin();
         contatoDao.salvar(contato);
         em.getTransaction().commit();
     }
@@ -99,7 +110,7 @@ public class ContatoApp {
         //Criar uma instância do Dao
         ContatoDao contatoDao = new ContatoDao(em);
 
-        contatoDao.consultarContatoPorId(4L);
+        contatoDao.consultarContatoPorId(6L);
 
     }
 

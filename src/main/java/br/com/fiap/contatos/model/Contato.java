@@ -60,6 +60,14 @@ public class Contato {
         this.dataNascimento = dataNascimento;
     }
 
+    public TipoContato getTipoContato() {
+        return tipoContato;
+    }
+
+    public void setTipoContato(TipoContato tipoContato) {
+        this.tipoContato = tipoContato;
+    }
+
     @Override
     public String toString() {
         return "Contato{" +
@@ -67,6 +75,7 @@ public class Contato {
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", dataNascimento=" + dataNascimento +
+                ", tipoContato=" + tipoContato.getTipo() +
                 '}';
     }
 }
