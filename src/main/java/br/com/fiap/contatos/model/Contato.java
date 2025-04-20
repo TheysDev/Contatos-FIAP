@@ -17,10 +17,16 @@ public class Contato {
             sequenceName = "T_CONTATOS_SEQ",
             allocationSize = 1)
     private Long id;
+
     private String nome;
+
     private String email;
+
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
+
+    @ManyToOne
+    private TipoContato tipoContato;
 
     public Long getId() {
         return id;
