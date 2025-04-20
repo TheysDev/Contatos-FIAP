@@ -1,6 +1,6 @@
 package br.com.fiap.contatos;
 
-import br.com.fiap.contatos.dao.Conexao;
+import br.com.fiap.contatos.utils.Conexao;
 import br.com.fiap.contatos.dao.ContatoDao;
 import br.com.fiap.contatos.dao.TipoContatoDao;
 import br.com.fiap.contatos.model.Contato;
@@ -17,12 +17,28 @@ public class ContatoApp {
         EntityManager em = Conexao.getEntityManager();
 
         //cadastrar(em);
-        // atualizar(em);
-        // excluir(em);
-        consultarContatoPorId(em);
+        //atualizar(em);
+        //excluir(em);
+        //consultarContatoPorId(em);
         //listarTodosOsContatos(em);
         //listarContatosPorEmail(em);
+        consultarTipoContatoPeloId(em);
 
+
+
+    }
+
+    private static void consultarTipoContatoPeloId(EntityManager em) {
+
+        TipoContatoDao tipoContatoDao = new TipoContatoDao(em);
+        TipoContato tipoContatoBuscado = new TipoContato();
+        tipoContatoBuscado.setId(2L);
+
+        TipoContato tipoContatoEncontrado = new TipoContato();
+        tipoContatoEncontrado = tipoContatoDao.buscarTipoContatoPeloId(tipoContatoBuscado);
+
+        System.out.println("Tipo Contato: " + tipoContatoEncontrado.getTipo());
+        System.out.println("Contatos: " + tipoContatoEncontrado.getContatos());
 
     }
 
@@ -59,16 +75,17 @@ public class ContatoApp {
     public static void cadastrar(EntityManager em){
 
         TipoContato tipoContato = new TipoContato();
-        tipoContato.setId(1L);
+        tipoContato.setId(2L);
+        //tipoContato.setTipo("Família");
 
         TipoContatoDao tipoContatoDao = new TipoContatoDao(em);
 
         em.getTransaction().begin();
-
+        //tipoContatoDao.salvar(tipoContato);
 
         Contato contato = new Contato();
-        contato.setNome("Pedro da Silva");
-        contato.setEmail("pedro@fiap.com.br");
+        contato.setNome("Ana Maria");
+        contato.setEmail("ana@fiap.com.br");
         contato.setDataNascimento(LocalDate.of(2004,11,10));
         contato.setTipoContato(tipoContato);
 

@@ -26,6 +26,7 @@ public class Contato {
     private LocalDate dataNascimento;
 
     @ManyToOne
+    @JoinColumn(name = "tipoContato_id")
     private TipoContato tipoContato;
 
     public Long getId() {

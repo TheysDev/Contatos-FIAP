@@ -1,4 +1,4 @@
-package br.com.fiap.contatos.dao;
+package br.com.fiap.contatos.utils;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
